@@ -24,13 +24,13 @@ uv pip install 'flask'
 echo "Installing vagen package..."
 uv pip install -e .
 
-echo "Installing Sokoban dependencies"
-uv pip install 'gym'
-uv pip install 'gym-sokoban'
+# echo "Installing Sokoban dependencies"
+# uv pip install 'gym'
+# uv pip install 'gym-sokoban'
 
-echo "Installing Frozenlake dependencies"
-uv pip install 'gymnasium'
-uv pip install 'pygame'
-uv pip install "gym-toytext"
+# echo "Installing Frozenlake dependencies"
+# uv pip install 'gymnasium'
+# uv pip install 'pygame'
+# uv pip install "gym-toytext"
 
 echo "Installation complete, to install dependencies for other environments, refer to env/readme!"
