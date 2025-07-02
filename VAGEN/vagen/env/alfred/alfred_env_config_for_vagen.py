@@ -24,6 +24,6 @@ class AlfredEnvConfig(BaseEnvConfig):
         #     test_candidates.extend(list(range(start, end)))
         # test_seeds = np.random.choice(test_candidates, size=env_size-train_size, replace=True).tolist()
 
-        test_seeds = list(range(100, 150)) + list(range(200, 250)) + list(range(500, 550))
+        test_seeds = list(range(100, 150)) + list(range(200, 250)) + list(range(500, 550)) + [100,100,100]
         
         return train_seeds + test_seeds

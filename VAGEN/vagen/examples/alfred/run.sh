@@ -23,8 +23,8 @@ python3 -m vagen.trainer.main_ppo \
     algorithm.high_level_gamma=0.95 \
     data.train_files=data/alfred-debug/train.parquet \
     data.val_files=data/alfred-debug/test.parquet \
-    data.train_batch_size=30 \
-    data.val_batch_size=30 \
+    data.train_batch_size=51 \
+    data.val_batch_size=51 \
     data.max_prompt_length=2048 \
     data.max_response_length=512 \
     data.max_trajectory_length=7000 \
@@ -33,7 +33,7 @@ python3 -m vagen.trainer.main_ppo \
     actor_rollout_ref.model.path=era-temporary/eb_alfred-stage-2_after-stage_1_single_step_success_episodes-lr1e-5-full-e1-bs-16 \
     actor_rollout_ref.actor.optim.lr=1e-6 \
     actor_rollout_ref.model.use_remove_padding=True \
-    actor_rollout_ref.actor.ppo_mini_batch_size=60 \
+    actor_rollout_ref.actor.ppo_mini_batch_size=18 \
     actor_rollout_ref.actor.ppo_micro_batch_size_per_gpu=1 \
     actor_rollout_ref.actor.use_kl_loss=False \
     actor_rollout_ref.actor.kl_loss_coef=0.001 \
@@ -66,13 +66,13 @@ python3 -m vagen.trainer.main_ppo \
     trainer.critic_warmup=3 \
     trainer.logger=['console','wandb'] \
     trainer.project_name='alfred' \
-    trainer.experiment_name='alfred_stage_2_reasoning_mini60_turn30_temp0.5' \
+    trainer.experiment_name='alfred_stage_2_reasoning_batch51_mini18_turn30_train_temp0.5top09_val_temp01' \
     trainer.n_gpus_per_node=3 \
     trainer.nnodes=1 \
-    trainer.save_freq=5 \
-    +trainer.save_start=5 \
-    trainer.test_freq=5 \
-    +trainer.test_start=5 \
+    trainer.save_freq=4 \
+    +trainer.save_start=4 \
+    trainer.test_freq=4 \
+    +trainer.test_start=4 \
     trainer.total_training_steps=40 \
     trainer.default_local_dir=/projects/illinois/eng/ece/huanz/era-rl-alfred-$(date +%Y%m%d_%H%M%S) \
     rollout_manager.max_turns=30 \
@@ -80,7 +80,7 @@ python3 -m vagen.trainer.main_ppo \
     rollout_manager.use_multi_turn_reward=True \
     rollout_manager.use_loss_mask=True \
     rollout_manager.use_gae_mask=True \
-    trainer.val_before_train=False  \
+    trainer.val_before_train=True  \
     trainer.val_generations_to_log_to_wandb=4 \
     +trainer.curriculum_learning=disable \
     +trainer.max_ckpt_to_keep=5 \
