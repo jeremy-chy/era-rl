@@ -43,11 +43,12 @@ dependencies = [
     "pybind11",
     "pylatexenc",
     "ray>=2.10",
-    "tensordict<0.6",
+    "tensordict==0.6.2",
     "torchdata",
     "transformers==4.49.0",
     'wandb',
     'vllm==0.8.2',
+    'flash_attn==2.7.3'
 ]
 
 # Optional dependencies (extras_require in setup.py)

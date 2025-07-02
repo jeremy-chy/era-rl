@@ -1,5 +1,5 @@
 # from .sokoban import SokobanEnv,SokobanEnvConfig
-from .frozenlake import FrozenLakeEnvConfig
+# from .frozenlake import FrozenLakeEnvConfig
 from .alfred.alfred_env_config_for_vagen import AlfredEnvConfig
 from .ebman.ebman_env_config_for_vagen import EBManEnvConfig
 # from .navigation import NavigationEnv, NavigationEnvConfig, NavigationServiceConfig, NavigationService
@@ -11,11 +11,11 @@ REGISTERED_ENV = {
     #     "env_cls": SokobanEnv,
     #     "config_cls": SokobanEnvConfig,
     # },
-    "frozenlake": {
-        # "env_cls": FrozenLakeEnv,
-        "config_cls": FrozenLakeEnvConfig,
-        # "service_cls": FrozenLakeService
-    },
+    # "frozenlake": {
+    #     # "env_cls": FrozenLakeEnv,
+    #     "config_cls": FrozenLakeEnvConfig,
+    #     # "service_cls": FrozenLakeService
+    # },
     "alfred": {
         # "env_cls": None,
         "config_cls": AlfredEnvConfig,
