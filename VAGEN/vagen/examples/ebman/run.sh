@@ -31,9 +31,9 @@ python3 -m vagen.trainer.main_ppo \
     data.image_key=images \
     data.truncation=error \
     actor_rollout_ref.model.path=era-temporary/eb_man_stage_1_sampled_single_step_success_from_gt-lr1e-5-full-e1-bs-16 \
-    actor_rollout_ref.actor.optim.lr=1e-6 \
+    actor_rollout_ref.actor.optim.lr=6e-7 \
     actor_rollout_ref.model.use_remove_padding=True \
-    actor_rollout_ref.actor.ppo_mini_batch_size=16 \
+    actor_rollout_ref.actor.ppo_mini_batch_size=48 \
     actor_rollout_ref.actor.ppo_micro_batch_size_per_gpu=1 \
     actor_rollout_ref.actor.use_kl_loss=False \
     actor_rollout_ref.actor.kl_loss_coef=0.001 \
@@ -53,7 +53,7 @@ python3 -m vagen.trainer.main_ppo \
     actor_rollout_ref.ref.log_prob_micro_batch_size_per_gpu=1 \
     actor_rollout_ref.ref.fsdp_config.param_offload=False \
     actor_rollout_ref.rollout.top_p=0.7 \
-    actor_rollout_ref.rollout.temperature=0.4 \
+    actor_rollout_ref.rollout.temperature=0.3 \
     critic.optim.lr=1e-5 \
     critic.model.use_remove_padding=True \
     critic.model.path=era-temporary/eb_man_stage_1_sampled_single_step_success_from_gt-lr1e-5-full-e1-bs-16 \
@@ -66,11 +66,13 @@ python3 -m vagen.trainer.main_ppo \
     trainer.critic_warmup=3 \
     trainer.logger=['console','wandb'] \
     trainer.project_name='vagen_ebman' \
-    trainer.experiment_name='insert_reason-train-mini16-temp04top07-test-temp01top1' \
+    trainer.experiment_name='insert_reason-train-mini16-temp03top07-test-temp001top1-lr6e7' \
     trainer.n_gpus_per_node=8 \
     trainer.nnodes=1 \
-    trainer.save_freq=50 \
-    trainer.test_freq=5 \
+    trainer.save_freq=100 \
+    +trainer.save_start=5 \
+    trainer.test_freq=4 \
+    +trainer.test_start=4 \
     trainer.total_training_steps=60 \
     trainer.default_local_dir=/srv/local/ry21/era-rl-ebman-mini16-temp04top07-$(date +%Y%m%d_%H%M%S) \
     rollout_manager.max_turns=15 \

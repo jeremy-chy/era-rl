@@ -1257,7 +1257,7 @@ class RayPPOTrainer(object):
                     batch.non_tensor_batch['extra_info'][i]
                     for i in range(len(batch))
                 ]
-                rollout_manager.reset(env_configs, has_val_first=self.config.trainer.val_before_train)
+                rollout_manager.reset(env_configs, has_val_first=self.config.trainer.val_before_train, global_steps=self.global_steps+1)
 
                 with _timer('step', timing_raw):
                     # generate a batch

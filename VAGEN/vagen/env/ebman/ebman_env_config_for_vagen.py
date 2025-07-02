@@ -17,5 +17,5 @@ class EBManEnvConfig(BaseEnvConfig):
             train_candidates.extend(list(range(start, end)))
         train_seeds = np.random.choice(train_candidates, size=train_size, replace=True).tolist()
         
-        test_seeds = list(range(100, 148)) + list(range(300, 348))
+        test_seeds = list(range(0,48)) + list(range(100, 148)) + list(range(300, 348))
         return train_seeds + test_seeds

@@ -427,7 +427,7 @@ class BatchEnvClient:
         for env_id in ids2configs:
             self.env_configs[env_id] = ids2configs[env_id]
     
-    def reset_batch(self, ids2seeds: Dict[str, Any]) -> Dict[str, Tuple[Dict, Dict]]:
+    def reset_batch(self, ids2seeds: Dict[str, Any], global_steps=0) -> Dict[str, Tuple[Dict, Dict]]:
         """
         Reset multiple environments in batch.
         
@@ -437,7 +437,7 @@ class BatchEnvClient:
         Returns:
             Dictionary mapping environment IDs to (observation, info) tuples
         """
-        response = self._make_request("batch/reset", "POST", {"ids2seeds": ids2seeds})
+        response = self._make_request("batch/reset", "POST", {"ids2seeds": ids2seeds, "global_steps": global_steps})
         results = response.get("results", {})
         
         # Deserialize observations
