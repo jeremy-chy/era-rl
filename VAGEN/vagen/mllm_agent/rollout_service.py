@@ -189,7 +189,7 @@ class QwenVLRolloutManagerService():
         return new_input_ids, new_attention_mask, new_loss_mask, new_end_of_response_position_mask
     
     @torch.no_grad()
-    def reset(self, env_configs):
+    def reset(self, env_configs, has_val_first=False):
         """
         Reset environments based on provided configurations, reusing environments when possible.
         - For env with same config and env_name, reuse the same environment (reset)
@@ -213,7 +213,7 @@ class QwenVLRolloutManagerService():
         ids2configs_create = {}
         ids2seeds_reset = {}
 
-        if len(self.envs) == 0:
+        if len(self.envs) == 0 and (not has_val_first):
             for i, cfg in enumerate(env_configs):
                 env_id = self.split + str(i)
                 self.envs[env_id] = cfg["seed"]

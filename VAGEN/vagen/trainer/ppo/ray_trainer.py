@@ -858,7 +858,7 @@ class RayPPOTrainer(object):
         wandb.log({"val/generations": new_table}, step=self.global_steps)
         self.validation_table = new_table
     
-    def _validate(self):
+    def _validate(self, first_time=False):
         print(f"[DEBUG] validation at global step {self.global_steps} begins")
         # Lists to collect samples for the table
     
@@ -905,7 +905,7 @@ class RayPPOTrainer(object):
             
             print(env_configs)
             
-            self.test_rollout_manager.reset(env_configs)
+            self.test_rollout_manager.reset(env_configs, first_time=first_time)
             self.test_rollout_manager.rollout_loop()
             micro_validation_rst = self.test_rollout_manager.recording_to_log() # data source == inputs in our current setting, outputs=whole trjecotry
             validation_rst.extend(micro_validation_rst)
@@ -1187,7 +1187,7 @@ class RayPPOTrainer(object):
             return
 
         if self.config.trainer.val_before_train == True:
-            self._validate()
+            self._validate(first_time=True)
 
         for epoch in range(self.config.trainer.total_epochs):
             for batch_dict in self.train_dataloader:
@@ -1257,7 +1257,7 @@ class RayPPOTrainer(object):
                     batch.non_tensor_batch['extra_info'][i]
                     for i in range(len(batch))
                 ]
-                rollout_manager.reset(env_configs)
+                rollout_manager.reset(env_configs, has_val_first=self.config.trainer.val_before_train)
 
                 with _timer('step', timing_raw):
                     # generate a batch

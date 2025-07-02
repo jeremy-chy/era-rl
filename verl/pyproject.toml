@@ -48,7 +48,6 @@ dependencies = [
     "transformers==4.49.0",
     'wandb',
     'vllm==0.8.2',
-    'flash_attn==2.7.3'
 ]
 
 # Optional dependencies (extras_require in setup.py)
