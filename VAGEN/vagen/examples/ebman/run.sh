@@ -30,7 +30,7 @@ python3 -m vagen.trainer.main_ppo \
     data.max_trajectory_length=5000 \
     data.image_key=images \
     data.truncation=error \
-    actor_rollout_ref.model.path=era-temporary/eb_man_stage_1_sampled_single_step_success_from_gt-lr1e-5-full-e1-bs-16 \
+    actor_rollout_ref.model.path=era-temporary/eb_man_stage_1_sampled_spatial_successful_trajectory_gt_visual_description-lr1e-5-full-e1-bs-16 \
     actor_rollout_ref.actor.optim.lr=6e-7 \
     actor_rollout_ref.model.use_remove_padding=True \
     actor_rollout_ref.actor.ppo_mini_batch_size=48 \
@@ -50,13 +50,14 @@ python3 -m vagen.trainer.main_ppo \
     actor_rollout_ref.rollout.enforce_eager=False \
     actor_rollout_ref.rollout.free_cache_engine=False \
     actor_rollout_ref.rollout.n=1 \
+    actor_rollout_ref.rollout.test_temp = 0.1 \
     actor_rollout_ref.ref.log_prob_micro_batch_size_per_gpu=1 \
     actor_rollout_ref.ref.fsdp_config.param_offload=False \
     actor_rollout_ref.rollout.top_p=0.7 \
     actor_rollout_ref.rollout.temperature=0.3 \
     critic.optim.lr=1e-5 \
     critic.model.use_remove_padding=True \
-    critic.model.path=era-temporary/eb_man_stage_1_sampled_single_step_success_from_gt-lr1e-5-full-e1-bs-16 \
+    critic.model.path=era-temporary/eb_man_stage_1_sampled_spatial_successful_trajectory_gt_visual_description-lr1e-5-full-e1-bs-16 \
     critic.model.enable_gradient_checkpointing=True \
     critic.ppo_micro_batch_size_per_gpu=1 \
     critic.model.fsdp_config.param_offload=False \
@@ -66,7 +67,7 @@ python3 -m vagen.trainer.main_ppo \
     trainer.critic_warmup=3 \
     trainer.logger=['console','wandb'] \
     trainer.project_name='vagen_ebman' \
-    trainer.experiment_name='insert_reason-train-mini16-temp03top07-test-temp001top1-lr6e7' \
+    trainer.experiment_name='insert_reason-train-mini48-temp03top07-test-temp01top1-lr6e7-with-dyre' \
     trainer.n_gpus_per_node=8 \
     trainer.nnodes=1 \
     trainer.save_freq=100 \
@@ -74,7 +75,7 @@ python3 -m vagen.trainer.main_ppo \
     trainer.test_freq=4 \
     +trainer.test_start=4 \
     trainer.total_training_steps=60 \
-    trainer.default_local_dir=/srv/local/ry21/era-rl-ebman-mini16-temp04top07-$(date +%Y%m%d_%H%M%S) \
+    trainer.default_local_dir=/srv/local/ry21/era-rl-ebman-mini48-temp03top07-test-temp001top1-lr6e7-with-dyre-$(date +%Y%m%d_%H%M%S) \
     rollout_manager.max_turns=15 \
     rollout_manager.window_size=1 \
     rollout_manager.use_multi_turn_reward=True \
