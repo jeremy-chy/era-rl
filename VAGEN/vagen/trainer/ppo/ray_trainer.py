@@ -167,7 +167,13 @@ def augment_with_next_value(data_proto: DataProto) -> DataProto:
         for pos, idx in enumerate(idx_list):
             if pos < len(idx_list) - 1:
                 next_idx = idx_list[pos + 1]
+
                 next_value = samples[next_idx]['values'][samples[next_idx]['single_value_position']]
+                # start_pos = samples[next_idx]['single_value_position']
+                # values_tensor = samples[next_idx]['values']
+                # next_value = values_tensor[start_pos:].mean()
+
+
                 # ensure next_value is a scalar tensor and convert to float type
                 if isinstance(next_value, torch.Tensor):
                     if next_value.numel() == 1:
@@ -1172,13 +1178,21 @@ class RayPPOTrainer(object):
             # After warmup, gradually reduce filtering
             steps_after_warmup = global_step - critic_warmup_steps
             if steps_after_warmup == 1:
-                return 16
+                return 40
             elif steps_after_warmup == 2:
-                return 12
+                return 35
             elif steps_after_warmup == 3:
-                return 8
+                return 30
             elif steps_after_warmup == 4:
-                return 4
+                return 25
+            elif steps_after_warmup == 5:
+                return 20
+            elif steps_after_warmup == 6:
+                return 15
+            elif steps_after_warmup == 7:
+                return 10
+            elif steps_after_warmup == 8:
+                return 5
             else:
                 return 0  # No filtering after step 7
 

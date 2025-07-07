@@ -116,9 +116,6 @@ def compute_gae_advantage_return_with_loss_mask(token_level_rewards: torch.Tenso
 
             next_step_gae = env_gae_dict.get((curr_env_id, curr_step_id + 1), 0.0)
             
-            # # initialize lastgaelam
-            # lastgaelam = next_step_gae
-            
             #### modification for era
             value = values[b, value_pos[b]]
             next_value = next_values[b]
@@ -131,6 +128,8 @@ def compute_gae_advantage_return_with_loss_mask(token_level_rewards: torch.Tenso
             for i, pos in enumerate(valid_positions):
                 returns[b, pos] = advantages[b, pos] + value
             
+            
+            # lastgaelam = next_step_gae
 
             # for i in range(len(valid_positions) - 1, -1, -1):
             #     curr_pos = valid_positions[i]
@@ -156,7 +155,7 @@ def compute_gae_advantage_return_with_loss_mask(token_level_rewards: torch.Tenso
             #     if i == len(valid_positions) - 1:
             #         env_gae_dict[(curr_env_id, curr_step_id)] = lastgaelam
             
-            # Calculate returns for valid positions
+            # # Calculate returns for valid positions
             # for i, pos in enumerate(valid_positions):
             #     returns[b, pos] = advantages[b, pos] + values[b, pos]
 
