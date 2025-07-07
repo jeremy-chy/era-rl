@@ -220,7 +220,7 @@ class vLLMRollout(BaseRollout):
                 'top_p': 1.0,
                 # 'top_k': -1,
                 # 'min_p': 0.0,
-                'temperature': 0.1,
+                'temperature': self.config.test_temp,  # use test_temp for validation
                 # 'n': 1  # if greedy, only 1 response
             }
 
